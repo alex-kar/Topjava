@@ -25,4 +25,22 @@
         <url-pattern>/meals</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>deleteMealServlet</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.DeleteMealServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteMealServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>changeMealServlet</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.ChangeMealServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>changeMealServlet</servlet-name>
+        <url-pattern>/change</url-pattern>
+    </servlet-mapping>
+
 </web-app>

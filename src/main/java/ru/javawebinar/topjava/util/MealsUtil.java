@@ -5,6 +5,7 @@ import ru.javawebinar.topjava.model.MealTo;
 
 import java.time.LocalTime;
 import java.util.*;
+import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -23,8 +24,9 @@ public class MealsUtil {
         }).collect(toList());
     }
 
-    public static List<MealTo> getWithExceed(List<Meal> meals, int caloriesPerDay) {
-        return meals
+    public static List<MealTo> getWithExceed(ConcurrentMap<Integer, Meal> map, int caloriesPerDay) {
+        return map
+                .values()
                 .stream()
                 .collect(Collectors.groupingBy(Meal::getDate))
                 .values()
@@ -39,6 +41,7 @@ public class MealsUtil {
     }
 
     private static MealTo createWithExcess(Meal meal, boolean excess) {
-        return new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+        return new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess, meal.getId());
     }
+
 }

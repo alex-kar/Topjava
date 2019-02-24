@@ -19,14 +19,12 @@ import java.util.List;
 public class MealServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(MealServlet.class);
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private Meals meals = new Meals();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("forward to meals");
-        List<MealTo> mealTos = MealsUtil.getWithExceed(meals.getMealsList(), 2000);
+        List<MealTo> mealTos = MealsUtil.getWithExceed(Meals.getMealsMap(), 2000);
         request.setAttribute("formatter", formatter);
         request.setAttribute("meals", mealTos);
         getServletContext().getRequestDispatcher("/meals.jsp").forward(request, response);
     }
-
 }
