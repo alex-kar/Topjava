@@ -36,6 +36,7 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
             return meal;
         } else {
             log.warn("else {}", meal.toString());
+            if (checkUserHasNoMeals(userId)) return null;
             if (meal.getUserId() != userId) return null;
             return repository.computeIfPresent(meal.getId(), (integer, meal1) -> meal);
         }

@@ -8,16 +8,14 @@ import java.time.format.DateTimeFormatter;
 public class DateTimeUtil {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public static boolean isBetween(LocalTime lt, LocalTime startTime, LocalTime endTime) {
-        if (startTime == null) startTime = LocalTime.MIN;
-        if (endTime == null) endTime = LocalTime.MAX;
-        return lt.compareTo(startTime) >= 0 && lt.compareTo(endTime) <= 0;
-    }
-
-    public static boolean isBetween(LocalDate lt, LocalDate startDate, LocalDate endDate) {
-        if (startDate == null) startDate = LocalDate.MIN;
-        if (endDate == null) endDate = LocalDate.MAX;
-        return lt.compareTo(startDate) >= 0 && lt.compareTo(endDate) <= 0;
+    static <T extends Comparable<T>> boolean isBetween(T lt, T start, T end) {
+        if (start == null) {
+            return lt.compareTo(end) <= 0;
+        } else if (end == null) {
+            return lt.compareTo(start) >= 0;
+        } else {
+            return lt.compareTo(start) >= 0 && lt.compareTo(end) <= 0;
+        }
     }
 
     public static String toString(LocalDateTime ldt) {
