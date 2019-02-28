@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
@@ -33,7 +33,7 @@
         </tr>
         </thead>
         <c:forEach items="${meals}" var="meal">
-            <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.model.MealTo"/>
+            <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.MealTo"/>
             <tr class="${meal.excess ? 'excess' : 'normal'}">
                 <td>
                         <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
@@ -48,6 +48,23 @@
             </tr>
         </c:forEach>
     </table>
+    <br><br>
+    <form action="meals" method="get">
+        <label>От даты
+            <input type="date" name="startDate">
+        </label>
+        <label>До даты
+            <input type="date" name="endDate">
+        </label>
+        <label>От времени
+            <input type="time" name="startTime">
+        </label>
+        <label>До времени
+            <input type="time" name="endTime">
+        </label>
+        <button type="submit">Save</button>
+        <button onclick="window.history.back()" type="button">Cancel</button>
+    </form>
 </section>
 </body>
 </html>
