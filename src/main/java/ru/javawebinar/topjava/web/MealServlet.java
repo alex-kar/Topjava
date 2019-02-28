@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.util.MealsUtil;
+import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.web.meal.MealRestController;
 
 import javax.servlet.ServletException;
@@ -69,7 +69,6 @@ public class MealServlet extends HttpServlet {
         switch (action == null ? "all" : action) {
             case "delete":
                 int id = getId(request);
-                log.info("Delete {}", id);
                 controller.delete(id);
                 response.sendRedirect("meals");
                 break;
@@ -83,21 +82,15 @@ public class MealServlet extends HttpServlet {
                 break;
             case "all":
             default:
-                log.info("getAll");
+                List<MealTo> mealTos;
                 List<LocalTime> timeRange = getListOfTimeRange(request.getParameter("startTime"), request.getParameter("endTime"));
                 List<LocalDate> dateRange = getListOfDateRange(request.getParameter("startDate"), request.getParameter("endDate"));
                 if (timeRange != null && timeRange.size() > 0) {
-                    request.setAttribute("meals",
-                            MealsUtil.getFilteredWithExcess(controller.getAll(), MealsUtil.DEFAULT_CALORIES_PER_DAY,
-                                    timeRange.get(0), timeRange.get(1)));
+                    mealTos = controller.getAll(timeRange.get(0), timeRange.get(1), "time");
                 } else if (dateRange != null && dateRange.size() > 0) {
-                    request.setAttribute("meals",
-                            MealsUtil.getFilteredWithExcess(controller.getAll(), MealsUtil.DEFAULT_CALORIES_PER_DAY,
-                                    dateRange.get(0), dateRange.get(1)));
-                } else {
-                    request.setAttribute("meals",
-                            MealsUtil.getWithExcess(controller.getAll(), MealsUtil.DEFAULT_CALORIES_PER_DAY));
-                }
+                    mealTos = controller.getAll(dateRange.get(0), dateRange.get(1), "date");
+                } else mealTos = controller.getAll();
+                request.setAttribute("meals", mealTos);
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
         }
@@ -136,5 +129,7 @@ public class MealServlet extends HttpServlet {
     private LocalDate getDate(String dateString) {
         return dateString.isEmpty() ? null : LocalDate.parse(dateString);
     }
-
 }
+
+
+
