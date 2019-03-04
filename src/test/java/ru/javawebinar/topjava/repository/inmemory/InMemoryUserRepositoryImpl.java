@@ -14,7 +14,6 @@ import static ru.javawebinar.topjava.UserTestData.ADMIN;
 import static ru.javawebinar.topjava.UserTestData.USER;
 
 @Repository
-@Qualifier("inMemoryUserRepository")
 public class InMemoryUserRepositoryImpl extends InMemoryBaseRepositoryImpl<User> implements UserRepository {
 
     public void init() {
