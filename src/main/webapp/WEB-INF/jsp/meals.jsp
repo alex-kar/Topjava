@@ -3,10 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
 <html>
-<head>
-    <title>Calories management</title>
-    <link rel="stylesheet" type="text/css" href="resources/css/style.css">
-</head>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <body>
 <section>
     <h3>Meals</h3>
