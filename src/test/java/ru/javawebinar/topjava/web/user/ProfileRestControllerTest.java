@@ -26,7 +26,8 @@ class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL))
+        mockMvc.perform(get(REST_URL)
+                .with(userHttpBasic(USER)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(USER));
@@ -34,7 +35,8 @@ class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL))
+        mockMvc.perform(delete(REST_URL)
+                .with(userHttpBasic(USER)))
                 .andExpect(status().isNoContent());
         assertMatch(userService.getAll(), ADMIN);
     }
@@ -43,7 +45,8 @@ class ProfileRestControllerTest extends AbstractControllerTest {
     void testRegister() throws Exception {
         UserTo createdTo = new UserTo(null, "newName", "newemail@ya.ru", "newPassword", 1500);
 
-        ResultActions action = mockMvc.perform(post(REST_URL + "/register").contentType(MediaType.APPLICATION_JSON)
+        ResultActions action = mockMvc.perform(post(REST_URL + "/register")
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(createdTo)))
                 .andDo(print())
                 .andExpect(status().isCreated());
@@ -61,6 +64,7 @@ class ProfileRestControllerTest extends AbstractControllerTest {
         UserTo updatedTo = new UserTo(null, "newName", "newemail@ya.ru", "newPassword", 1500);
 
         mockMvc.perform(put(REST_URL)
+                .with(userHttpBasic(USER))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updatedTo)))
                 .andDo(print())
