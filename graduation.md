@@ -1,4 +1,8 @@
-## Выпускной проект
+## Выпускной проект Topjava
+
+> Ревью проекта входит в участие с проверкой домашних заданий (ревьюится один раз!). Отдать на ревью нужно до 16.05.2019 (если идешь на проект "<a href="http://javaops.ru/reg/masterjava">Многомодульный maven. Многопоточность. XML (JAXB/StAX).
+    Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA) (Masterjava)</a>", то срок до 16.08.2019).
+
 Design and implement a REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) **without frontend**.
 
 The task is:
@@ -16,7 +20,9 @@ Build a voting system for deciding where to have lunch.
 
 Each restaurant provides new menu each day.
 
-As a result, provide a link to github repository. It should contain the code, README.md with API documentation and couple curl commands to test it.
+As a result, provide a link to github repository.
+
+It should contain the code and **README.md with API documentation and curl commands to get data for voting and vote.**
 
 -----------------------------
 P.S.: Make sure everything works with latest version that is on github :)
@@ -26,7 +32,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
 -----------------------------
 ### ![error](https://cloud.githubusercontent.com/assets/13649199/13672935/ef09ec1e-e6e7-11e5-9f79-d1641c05cbe6.png) Рекомендации
 
-- Если ты закончил [стажировку Topjava](http://javaops.ru/reg/topjava/grd),  **cделай новый проект и добавляй туда из Topjava только то что нужно!** Локализация, типы ошибок, BeanMatcher, Json View, излишние делегирования и наследования - **не нужны!**
+- **Сделай новый проект и добавляй туда из Topjava только то что нужно! Локализация, типы ошибок, BeanMatcher, Json View, излишние делегирования и наследования - не нужны!**
 - **API продумывай с точки зрения не программиста и объектов, а с точки зрения того, кто им будет пользоваться (frontend)**
 - **Сначала сделай основной сценарий по ТЗ. Все остальное (если очень хочется, 3 раза подумай) - потом.**
 
@@ -55,7 +61,7 @@ _Антуан де Сент-Экзюпери_
 - 11: если приложению в объекте требуется только его id, используйте reference (как мы при сохранении еды вставляем туда юзера)
 - 12: [Use for money in java app](http://stackoverflow.com/a/43051227/548473)
 - 13: **Историю еды и голосований сделать НУЖНО! Есть базовые вещи, которые закладываются в архитектуру приложения и неочевидные доработки к ТЗ, которых лучше не делать.**
-- 14: Еще раз про [hashCode/equals в Entity](https://stackoverflow.com/questions/5031614/the-jpa-hashcode-equals-dilemma): не делайте сравнение по всем полям!
+- 14: Еще раз про [hashCode/equals в Entity](https://stackoverflow.com/questions/5031614/the-jpa-hashcode-equals-dilemma): не делайте сравнение по полям!
 - 15: Название пакетов, имен классов для `model/to/web` достаточно стандартные (например `model/domain`). НЕ надо придумывать своих собственных правил.
 - 16: **Используйте DATA-JPA** (можно без лишней делегации, напрямую из сервиса/контроллера дергать Repository).
 - 17: В DATA-JPA 2.x используются `Optional`. Попробуйте работать с ними, это безопасный способ работать с null значениями.
